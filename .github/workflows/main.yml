@@ -119,8 +119,12 @@ jobs:
             # ----- مرحله 4: دسته‌بندی و فشرده‌سازی به قطعات 90 مگابایتی -----
             echo "📁 [4/4] دسته‌بندی و ایجاد آرشیو (قطعات 90 مگابایت)..."
             BASENAME_NOEXT="${SAFE_FILENAME%.*}"
-            FOLDER_NAME=$(echo "$BASENAME_NOEXT" | sed 's/[\\/:*?"<>|]/_/g')
-            [ -z "$FOLDER_NAME" ] && FOLDER_NAME="downloaded_file"
+            BASENAME_SAFE=$(echo "$BASENAME_NOEXT" | sed 's/[\\/:*?"<>|]/_/g')
+            [ -z "$BASENAME_SAFE" ] && BASENAME_SAFE="downloaded_file"
+
+            # ✅ نام‌گذاری فولدر بر اساس نام فایل + تاریخ و ساعت دقیق
+            TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+            FOLDER_NAME="${BASENAME_SAFE}_${TIMESTAMP}"
 
             MIME=$(file -b --mime-type "$SAFE_FILENAME")
             EXT="${SAFE_FILENAME##*.}"
