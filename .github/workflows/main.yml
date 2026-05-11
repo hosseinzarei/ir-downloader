@@ -54,7 +54,7 @@ jobs:
 
             # ----- مرحله 1: استخراج نام واقعی فایل (چند روش) -----
             echo "🔍 [1/4] شناسایی نام فایل..."
-            REAL_FILENAME=$(curl -sI "$URL" | grep -i 'Content-Disposition' | sed -n 's/.*filename="\([^"]*\)".*/\1/p')
+            REAL_FILENAME=$(curl -sI --max-time 10 "$URL" 2>/dev/null | grep -i 'Content-Disposition' | sed -n 's/.*filename="\([^"]*\)".*/\1/p' || true)
             if [ -z "$REAL_FILENAME" ]; then
               REAL_FILENAME=$(echo "$URL" | grep -oP '(?<=filename=)[^&]+' | sed 's/%20/ /g' 2>/dev/null || true)
             fi
