@@ -64,7 +64,7 @@ jobs:
             if [ -z "$REAL_FILENAME" ]; then
               REAL_FILENAME="file_$(date +%s)"
             fi
-            SAFE_FILENAME=$(echo "$REAL_FILENAME" | sed 's/[\\/:*?"<>|]/_/g')
+            SAFE_FILENAME=$(echo "$REAL_FILENAME" | tr -d '\r\n' | sed 's/[\\/:*?"<>|]/_/g')
             echo "   📛 نام پایه: $SAFE_FILENAME"
 
             # ----- مرحله 2: دانلود با تلاش مجدد (تا 10 بار) -----
