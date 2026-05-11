@@ -89,8 +89,8 @@ jobs:
               fi
             done
             if [ "$SUCCESS" = false ]; then
-              echo "❌ خطا: دانلود فایل $SAFE_FILENAME پس از $MAX_RETRIES تلاش ناموفق بود."
-              exit 1
+              echo "❌ خطا: دانلود فایل $SAFE_FILENAME پس از $MAX_RETRIES تلاش ناموفق بود. رد شد."
+              continue
             fi
 
             # ----- مرحله 3: تشخیص فرمت واقعی و اضافه کردن پسوند -----
